@@ -90,13 +90,13 @@ public class Syllables
             exit(0);
         }
 
-        // Checks if the word ends with le or les
-
-        //if (lowercaseWord.charAt(i) == 'a' || lowercaseWord.charAt(i) == 'e' || lowercaseWord.charAt(i) == 'i' || lowercaseWord.charAt(i) == 'o' || lowercaseWord.charAt(i) == 'u')
+        // Checks if the word ends with le or les and if the letter before is a consonant
         if (lowercaseWord.endsWith("le") || lowercaseWord.endsWith("les")){
-            //out.println(lowercaseWord.charAt(lowercaseWord.length()-1));
-            //out.println(lowercaseWord.substring(lowercaseWord.indexOf("le")-1));
-
+            String checkFirstLetterVowel = lowercaseWord.substring(lowercaseWord.lastIndexOf("le") - 1);
+            out.println(checkFirstLetterVowel);
+            if (!(checkFirstLetterVowel.startsWith("a") ||checkFirstLetterVowel.startsWith("e") ||checkFirstLetterVowel.startsWith("i") || checkFirstLetterVowel.startsWith("o") || checkFirstLetterVowel.startsWith("u"))) {
+                syllableCount++;
+            }
         }
 
         if (lowercaseWord.startsWith("io"))

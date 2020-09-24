@@ -13,12 +13,13 @@ public class Syllables
 
     public static void main(String[] args)
     {
+        // what prints out to the console
     }
 
     public static int getSyllableCount(String word)
     {
         // Initiates the syllableCount variable as a integer
-        int syllableCount = 1;
+        int syllableCount = 1; // Subject to change due to some words ending up at 0
         String lowercaseWord = word.toLowerCase();
 
         if (wordIsEmpty(word)) {
@@ -29,11 +30,7 @@ public class Syllables
         for (int i = 0; i < lowercaseWord.length(); i++)
         {
             // Checks if string has a vowel
-            if (lowercaseWord.charAt(i) == 'a'
-                || lowercaseWord.charAt(i) == 'e'
-                || lowercaseWord.charAt(i) == 'i'
-                || lowercaseWord.charAt(i) == 'o'
-                || lowercaseWord.charAt(i) == 'u')
+            if (lowercaseWord.charAt(i) == 'a' || lowercaseWord.charAt(i) == 'e' || lowercaseWord.charAt(i) == 'i' || lowercaseWord.charAt(i) == 'o' || lowercaseWord.charAt(i) == 'u')
             {
                 // Adds one if true
                 syllableCount++;
@@ -95,8 +92,10 @@ public class Syllables
 
         // Checks if the word ends with le or les
 
-        if (lowercaseWord.endsWith("le") || lowercaseWord.endsWith("les"))
-        {
+        //if (lowercaseWord.charAt(i) == 'a' || lowercaseWord.charAt(i) == 'e' || lowercaseWord.charAt(i) == 'i' || lowercaseWord.charAt(i) == 'o' || lowercaseWord.charAt(i) == 'u')
+        if (lowercaseWord.endsWith("le") || lowercaseWord.endsWith("les")){
+            //out.println(lowercaseWord.charAt(lowercaseWord.length()-1));
+            //out.println(lowercaseWord.substring(lowercaseWord.indexOf("le")-1));
 
         }
 
@@ -108,11 +107,6 @@ public class Syllables
         {
             syllableCount++;
         }
-
-
-
-
-
 
         // Returns the syllableCount to the getSyllableCount function
         return syllableCount;

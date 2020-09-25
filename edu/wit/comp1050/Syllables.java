@@ -13,19 +13,34 @@ public class Syllables
 
     public static void main(String[] args)
     {
-        // what prints out to the console.
+        // Scanner to get user_input
+        Scanner s = new Scanner(System.in);
+
+        // Word from terminal into variable captureTheWord
+        String captureTheWord = args[0];
+
+        // Checks if the string is empty
+        if (captureTheWord.length() == 0) {
+            System.out.println("usage: Syllables <English word>");
+            return;
+        }
+
+        // Captures the int front sending the capture word into getSyllableCount parameter.
+        int numberOfSyllablesToConsole = getSyllableCount(captureTheWord);
+        // Print out the string in apostrophes with the number of syllables
+        System.out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllablesToConsole);
     }
 
     public static int getSyllableCount(String word)
     {
-        // Initiates the syllableCount variable as a integer.
-        int syllableCount = 0; // Subject to change due to some words ending up at 0.
-        String lowercaseWord = word.toLowerCase();
-
         if (wordIsEmpty(word)) {
             // Returns 0 if word is null or empty from the helper class.
-            return syllableCount = 0;
+            return 0;
         }
+        // Initiates the syllableCount variable as a integer.
+        int syllableCount = 0;
+        String lowercaseWord = word.toLowerCase();
+
 
         // For loop for the length of the word.
         for (int i = 0; i < lowercaseWord.length(); i++)
@@ -116,7 +131,6 @@ public class Syllables
         }
     }
 
-
         // If the word starts with io --> add 1 to the syllable count.
         if (lowercaseWord.startsWith("io"))
         {
@@ -130,6 +144,11 @@ public class Syllables
             syllableCount++;
         }
 
+        // (Most likely a better way to do this)
+        // If for any circumstance the syllableCount is equal to 0 it returns 1 instead
+        if (syllableCount == 0)
+            return 1;
+
         // Returns the syllableCount to the getSyllableCount function.
         return syllableCount;
     }
@@ -137,6 +156,6 @@ public class Syllables
     // Helper class to check if the String word is null or empty.
     private static boolean wordIsEmpty(String word) {
         // Checks if the word is null or is a empty string.
-        return word == null || word.isEmpty();
+        return word == null || word.length() == 0;
     }
 }

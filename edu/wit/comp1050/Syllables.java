@@ -1,39 +1,72 @@
 package edu.wit.comp1050;
 
-import static java.lang.System.exit;
-import static java.lang.System.out;
-
-import java.io.File;
-import java.io.FileNotFoundException ;
+import javax.imageio.plugins.tiff.ExifInteroperabilityTagSet;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import static java.lang.System.*;
 
 
 public class Syllables
 {
 
-    public static void main(String[] args)
-    {
-        // Scanner to get user_input
-        Scanner s = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
 
-        // Word from terminal into variable captureTheWord
-        String captureTheWord = args[0];
+        /*
+        I didn't know how to do a switch and kept researching and nothing helped. I wanted to pass args into the expression.
+         */
 
-        // Checks if the string is empty
-        if (captureTheWord.length() == 0) {
-            System.out.println("usage: Syllables <English word>");
+        // Initiates the variable
+        String captureTheWord = "";
+        // If the length of the argument is not 0 then continue
+        if (!(args.length == 0))
+        {
+            // Word from terminal into variable captureTheWord
+            captureTheWord = args[0];
+        } else
+            {
+            out.println("usage: Syllables <English word>");
+            // return to main method and exits
             return;
         }
 
         // Captures the int front sending the capture word into getSyllableCount parameter.
-        int numberOfSyllablesToConsole = getSyllableCount(captureTheWord);
-        // Print out the string in apostrophes with the number of syllables
-        System.out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllablesToConsole);
+        int numberOfSyllables = getSyllableCount(captureTheWord);
+
+        // Checks if there is 1 argument
+        if (args.length == 1)
+        {
+            // Prints if true
+            out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
+            // Checks if there is a argument
+        } else if(args.length == 2)
+        {
+                // if that argument is equal to the string -d then continue
+                if (args[1].equals("-d"))
+                {
+                    // Checks if the word is in the english.txt
+                    boolean wordCheckDictionary = checkEnglishWord(captureTheWord);
+                    if (wordCheckDictionary)
+                    {
+                        // If true print out the word with the syllables
+                        out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
+                    } else
+                        {
+                         // If false print out the word could not be found
+                        out.printf("'%s' is not an English word that I know!%n", captureTheWord);
+                    }
+                }
+            } else
+                {
+                out.println("usage: Syllables <English word>");
+            }
     }
 
     public static int getSyllableCount(String word)
     {
-        if (wordIsEmpty(word)) {
+        if (wordIsEmpty(word))
+        {
             // Returns 0 if word is null or empty from the helper class.
             return 0;
         }
@@ -110,22 +143,26 @@ public class Syllables
         }
 
         // Checks if the word ends with le.
-        if (lowercaseWord.endsWith("le")) {
+        if (lowercaseWord.endsWith("le"))
+        {
             // Gets the character before attached to the le.
             String leBeforeIfConsonant = lowercaseWord.substring(lowercaseWord.lastIndexOf("le") - 1);
             // Checks if it contains a vowel if not then continue if statement.
-            if (!(leBeforeIfConsonant.startsWith("a") || leBeforeIfConsonant.startsWith("e") || leBeforeIfConsonant.startsWith("i") || leBeforeIfConsonant.startsWith("o") || leBeforeIfConsonant.startsWith("u"))) {
+            if (!(leBeforeIfConsonant.startsWith("a") || leBeforeIfConsonant.startsWith("e") || leBeforeIfConsonant.startsWith("i") || leBeforeIfConsonant.startsWith("o") || leBeforeIfConsonant.startsWith("u")))
+            {
                 // Add one to syllableCount
                 syllableCount++;
             }
         }
 
         // Checks if the word ends with les.
-        if (lowercaseWord.endsWith("les")) {
+        if (lowercaseWord.endsWith("les"))
+        {
         // Gets the character before attached to the le.
         String lesBeforeIfConsonant = lowercaseWord.substring(lowercaseWord.lastIndexOf("les") - 1);
         // Checks if it contains a vowel if not then continue if statement.
-        if (!(lesBeforeIfConsonant.startsWith("a") || lesBeforeIfConsonant.startsWith("e") || lesBeforeIfConsonant.startsWith("i") || lesBeforeIfConsonant.startsWith("o") || lesBeforeIfConsonant.startsWith("u"))) {
+        if (!(lesBeforeIfConsonant.startsWith("a") || lesBeforeIfConsonant.startsWith("e") || lesBeforeIfConsonant.startsWith("i") || lesBeforeIfConsonant.startsWith("o") || lesBeforeIfConsonant.startsWith("u")))
+        {
             // Add one to syllableCount.
             syllableCount++;
         }
@@ -154,8 +191,31 @@ public class Syllables
     }
 
     // Helper class to check if the String word is null or empty.
-    private static boolean wordIsEmpty(String word) {
+    private static boolean wordIsEmpty(String word)
+    {
         // Checks if the word is null or is a empty string.
         return word == null || word.length() == 0;
+    }
+
+//     Check if the word is in the dictionary (english.txt)
+    public static boolean checkEnglishWord(String word) throws IOException
+    {
+        // Turns the word into lowecase
+        String noCaseMatter = word.toLowerCase();
+
+        // BufferedReader initiated
+        BufferedReader fileReader = new BufferedReader(new FileReader("english.txt"));
+        // Creates the array
+        ArrayList<String> captureDictionary = new ArrayList<String>();
+        // String for current line
+        String currentLine;
+
+        // If not null then add current line to the array
+        while ((currentLine = fileReader.readLine()) != null) {
+            captureDictionary.add(currentLine);
+        }
+
+        // Returns true or false based on if the word could be found
+        return captureDictionary.contains(noCaseMatter);
     }
 }

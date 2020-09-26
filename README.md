@@ -1,6 +1,6 @@
 [<img src="https://3.bp.blogspot.com/-0WUVUcPxXh4/XJsF47nfOLI/AAAAAAAAFks/7yi8doOzsX8M7YbkDnyoq5wrAzYeCeV3ACLcBGAs/s1600/building%2Bblocks%2BTerri%2527s%2BTeaching%2BTreasures.png" width="250"/>](image.png)
 
-# Vowel Counter
+# Syllable Counter
 
 Syllables Counter counts the number of syllables of any one word the users has entered in the terminal. This project was made in Java. 
 

@@ -39,7 +39,12 @@ public class Syllables
         if (args.length == 1)
         {
             // Prints if true
-            out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
+            if (numberOfSyllables == 1)
+            {
+                out.printf("'%s' has %d syllable%n", captureTheWord, numberOfSyllables);
+            } else{
+                out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
+            }
             // Checks if there is a argument
         } else if(args.length == 2)
         {
@@ -48,10 +53,16 @@ public class Syllables
                 {
                     // Checks if the word is in the english.txt
                     boolean wordCheckDictionary = checkEnglishWord(captureTheWord);
+                    // If true print out the word with the syllables
                     if (wordCheckDictionary)
                     {
-                        // If true print out the word with the syllables
-                        out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
+                        // If the number of Syllables is equal to one print out 'syllable'
+                        if (numberOfSyllables == 1)
+                        {
+                            out.printf("'%s' has %d syllable%n", captureTheWord, numberOfSyllables);
+                        } else{
+                            out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
+                        }
                     } else
                         {
                          // If false print out the word could not be found

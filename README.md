@@ -2,7 +2,7 @@
 
 # Syllable Counter
 
-Syllables Counter counts the number of syllables of any one word the users has entered in the terminal. This project was made in Java. 
+Syllable Counter counts the number of syllables of any one word the users has entered in the terminal. This project was made in Java. 
 
 
 ## Contributing

@@ -10,7 +10,8 @@ import static java.lang.System.*;
 public class Syllables
 {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException
+    {
 
         /*
         I didn't know how to do a switch and kept researching and nothing helped. I wanted to pass args into the expression.
@@ -25,6 +26,7 @@ public class Syllables
             captureTheWord = args[0];
         } else
             {
+            // Print if the if statement is true
             out.println("usage: Syllables <English word>");
             // return to main method and exits
             return;
@@ -64,6 +66,7 @@ public class Syllables
 
     public static int getSyllableCount(String word)
     {
+        // Sends the word as a parameter to the wordIsEmpty function
         if (wordIsEmpty(word))
         {
             // Returns 0 if word is null or empty from the helper class.
@@ -71,6 +74,7 @@ public class Syllables
         }
         // Initiates the syllableCount variable as a integer.
         int syllableCount = 0;
+        // Converts the word to lowercase
         String lowercaseWord = word.toLowerCase();
 
 
@@ -196,7 +200,7 @@ public class Syllables
         return word == null || word.length() == 0;
     }
 
-//     Check if the word is in the dictionary (english.txt)
+    // Check if the word is in the dictionary (english.txt)
     public static boolean checkEnglishWord(String word) throws IOException
     {
         // Turns the word into lowecase

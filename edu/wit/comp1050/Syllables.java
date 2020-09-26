@@ -1,6 +1,5 @@
 package edu.wit.comp1050;
 
-import javax.imageio.plugins.tiff.ExifInteroperabilityTagSet;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;

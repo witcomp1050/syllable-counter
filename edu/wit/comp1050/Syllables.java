@@ -9,16 +9,11 @@ import static java.lang.System.*;
 
 public class Syllables
 {
-
     public static void main(String[] args) throws IOException
     {
-
-        /*
-        I didn't know how to do a switch and kept researching and nothing helped. I wanted to pass args into the expression.
-         */
-
         // Initiates the variable
         String captureTheWord = "";
+
         // If the length of the argument is not 0 then continue
         if (!(args.length == 0))
         {
@@ -33,7 +28,8 @@ public class Syllables
         }
 
         // Captures the int front sending the capture word into getSyllableCount parameter.
-        int numberOfSyllables = getSyllableCount(captureTheWord);
+         int numberOfSyllables = getSyllableCount(captureTheWord);
+
 
         // Checks if there is 1 argument
         if (args.length == 1)
@@ -68,9 +64,13 @@ public class Syllables
                          // If false print out the word could not be found
                         out.printf("'%s' is not an English word that I know!%n", captureTheWord);
                     }
+                } else{
+                    // Prints out when the second argument is not -d
+                    out.println("usage: Syllables <English word>");
                 }
             } else
                 {
+                // Prints out when there are more than two arguments
                 out.println("usage: Syllables <English word>");
             }
     }

@@ -17,13 +17,13 @@ usage: Syllables <English word>
 
 
 Find the script's directory, mine was located in: Desktop\syllables-RamonAsuncion and run the script.
-![GIF](http://g.recordit.co/5QctH3aB0F.gif)
+![GIF](http://g.recordit.co/F4CBw3kTKD.gif)
 
 ## Example 
 ##### Terminal
 ```
 $ java edu.wit.comp1050.Syllables ok -d
-'ok' has 1 syllables
+'ok' has 1 syllable
 ```
 
 ##### Wentworth Institute of Technology

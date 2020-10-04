@@ -117,8 +117,8 @@ public class Syllables
         // Reads the triphthongs.txt file.
         try
         {
-            File file = new File("triphthongs.txt");
-            Scanner readTriphthongsFile = new Scanner(file);
+            FileInputStream fis = new FileInputStream("triphthongs.txt");
+            Scanner readTriphthongsFile = new Scanner(new InputStreamReader(fis));
             while (readTriphthongsFile.hasNextLine()) {
                 String contentsFromTriphthongsFile = readTriphthongsFile.nextLine();
                 // If word contains a triphthong.
@@ -127,10 +127,10 @@ public class Syllables
                     syllableCount--;
                 }
             }
-        } catch (FileNotFoundException e)
+        } catch (IOException ex)
         {
-            // If file not found print string below.
-            out.print("Attempt to open the triphthongs.txt file has failed. File does not exist.");
+            // IOException print as string
+            out.println (ex.toString());
             // Exits out of the program.
             exit(0);
         }
@@ -138,8 +138,9 @@ public class Syllables
         // Reads the diphthongs.txt file.
         try
         {
-            File file = new File("diphthongs.txt");
-            Scanner readDiphthongsFile = new Scanner(file);
+            String fileName = "diphthongs.txt";
+            FileInputStream fis = new FileInputStream(fileName);
+            Scanner readDiphthongsFile = new Scanner(new InputStreamReader(fis));
             while (readDiphthongsFile.hasNextLine()) {
                 String contentsFromDiphthongsFile = readDiphthongsFile.nextLine();
                 // If word contains a Diphthongs.
@@ -148,10 +149,10 @@ public class Syllables
                     syllableCount--;
                 }
             }
-        } catch (FileNotFoundException e)
+        } catch (IOException ex)
         {
-            // If file not found print string below.
-            out.print("Attempt to open the diphthongs.txt file has failed. File does not exist.");
+            // IOException print as string
+            out.println (ex.toString());
             // Exits out of the program.
             exit(0);
         }
@@ -214,7 +215,7 @@ public class Syllables
     // Check if the word is in the dictionary (english.txt)
     public static boolean checkEnglishWord(String word) throws IOException
     {
-        // Turns the word into lowecase
+        // Turns the word into lowercase
         String noCaseMatter = word.toLowerCase();
 
         // BufferedReader initiated

@@ -138,8 +138,7 @@ public class Syllables
         // Reads the diphthongs.txt file.
         try
         {
-            String fileName = "diphthongs.txt";
-            FileInputStream fis = new FileInputStream(fileName);
+            FileInputStream fis = new FileInputStream("diphthongs.txt");
             Scanner readDiphthongsFile = new Scanner(new InputStreamReader(fis));
             while (readDiphthongsFile.hasNextLine()) {
                 String contentsFromDiphthongsFile = readDiphthongsFile.nextLine();

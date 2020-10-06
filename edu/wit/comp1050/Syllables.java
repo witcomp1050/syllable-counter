@@ -117,7 +117,7 @@ public class Syllables
         // Reads the triphthongs.txt file.
         try
         {
-            FileInputStream fis = new FileInputStream("triphthongs.txt");
+            FileInputStream fis = new FileInputStream("./triphthongs.txt");
             Scanner readTriphthongsFile = new Scanner(new InputStreamReader(fis));
             while (readTriphthongsFile.hasNextLine()) {
                 String contentsFromTriphthongsFile = readTriphthongsFile.nextLine();
@@ -129,7 +129,7 @@ public class Syllables
             }
         } catch (IOException ex)
         {
-            // IOException print as string
+            // If file not found print string below.
             out.println (ex.toString());
             // Exits out of the program.
             exit(0);
@@ -138,7 +138,7 @@ public class Syllables
         // Reads the diphthongs.txt file.
         try
         {
-            FileInputStream fis = new FileInputStream("diphthongs.txt");
+            FileInputStream fis = new FileInputStream("./diphthongs.txt");
             Scanner readDiphthongsFile = new Scanner(new InputStreamReader(fis));
             while (readDiphthongsFile.hasNextLine()) {
                 String contentsFromDiphthongsFile = readDiphthongsFile.nextLine();
@@ -150,7 +150,7 @@ public class Syllables
             }
         } catch (IOException ex)
         {
-            // IOException print as string
+            // If file not found print string below.
             out.println (ex.toString());
             // Exits out of the program.
             exit(0);

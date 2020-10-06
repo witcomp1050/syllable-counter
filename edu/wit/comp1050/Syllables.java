@@ -117,16 +117,17 @@ public class Syllables
         // Reads the triphthongs.txt file.
         try
         {
-            FileInputStream fis = new FileInputStream("./triphthongs.txt");
-            Scanner readTriphthongsFile = new Scanner(new InputStreamReader(fis));
-            while (readTriphthongsFile.hasNextLine()) {
-                String contentsFromTriphthongsFile = readTriphthongsFile.nextLine();
-                // If word contains a triphthong.
+            InputStream inputTriph = Syllables.class.getResourceAsStream("/triphthongs.txt");
+            BufferedReader readTriphthongsFile = new BufferedReader(new InputStreamReader(inputTriph));
+
+            String contentsFromTriphthongsFile = "";
+            while((contentsFromTriphthongsFile = readTriphthongsFile.readLine() ) != null) {
                 if (lowercaseWord.contains(contentsFromTriphthongsFile)) {
                     // Subtract one to syllableCount.
                     syllableCount--;
                 }
             }
+
         } catch (IOException ex)
         {
             // If file not found print string below.
@@ -138,16 +139,17 @@ public class Syllables
         // Reads the diphthongs.txt file.
         try
         {
-            FileInputStream fis = new FileInputStream("./diphthongs.txt");
-            Scanner readDiphthongsFile = new Scanner(new InputStreamReader(fis));
-            while (readDiphthongsFile.hasNextLine()) {
-                String contentsFromDiphthongsFile = readDiphthongsFile.nextLine();
-                // If word contains a Diphthongs.
+            InputStream inputDiph = Syllables.class.getResourceAsStream("/diphthongs.txt");
+            BufferedReader readDiphthongsFile = new BufferedReader(new InputStreamReader(inputDiph));
+
+            String contentsFromDiphthongsFile = "";
+            while((contentsFromDiphthongsFile = readDiphthongsFile.readLine() ) != null) {
                 if (lowercaseWord.contains(contentsFromDiphthongsFile)) {
                     // Subtract one to syllableCount.
                     syllableCount--;
                 }
             }
+
         } catch (IOException ex)
         {
             // If file not found print string below.

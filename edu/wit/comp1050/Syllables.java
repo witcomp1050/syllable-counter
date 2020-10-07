@@ -2,7 +2,6 @@ package edu.wit.comp1050;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static java.lang.System.*;
 
@@ -107,7 +106,7 @@ public class Syllables
            syllableCount++;
        }
         // If last letter of the word is a e then subtract 1 (silent e at the end of a word).
-        if (lowercaseWord.charAt(lowercaseWord.length() - 1 ) == 'e')
+        if (lowercaseWord.endsWith("e"))
         {
             // Subtract one to syllableCount.
             syllableCount--;

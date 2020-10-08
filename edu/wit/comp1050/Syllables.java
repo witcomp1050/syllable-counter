@@ -177,6 +177,15 @@ public class Syllables
         }
     }
 
+        Pattern iO = Pattern.compile("(\\bio)");
+        // Matches the pattern with the word
+        Matcher startsWithIO = iO.matcher(lowercaseWord);
+        // Finds the pattern
+        while (startsWithIO.find()) {
+            // Add one to syllableCount.
+            syllableCount++;
+        }
+
         // If the word starts with io --> add 1 to the syllable count.
         if (lowercaseWord.startsWith("io"))
         {
@@ -185,14 +194,13 @@ public class Syllables
         }
 
         //  Pattern to check if the word or words end with ee
-        Pattern EEIE = Pattern.compile("ee\\b|ie\\b");
+        Pattern eEIE = Pattern.compile("ee\\b|ie\\b");
         // Matches the pattern with the word
-        Matcher endsWithEEorIE = EEIE.matcher(lowercaseWord);
+        Matcher endsWithEEorIE = eEIE.matcher(lowercaseWord);
         // Finds the pattern
         while (endsWithEEorIE.find()) {
             // Add one to syllableCount.
             syllableCount++;
-
         }
 
         // (Most likely a better way to do this)

@@ -98,15 +98,19 @@ public class Syllables
         }
 
         // Add 1 every time the letter y makes the sound of a vowel. (When y is not the first letter in the word.)
-        if (lowercaseWord.charAt(0) != 'y' && lowercaseWord.contains("y")) {
-            // Add one to syllableCount.
+        Pattern doesNotStartWithY = Pattern.compile("(?=\\By)(?!y$).");
+        Matcher matchRegexForY = doesNotStartWithY.matcher(lowercaseWord);
+        while (matchRegexForY.find()) {
+            // Subtracts 1 every time it matches the regex
             syllableCount++;
         }
+
+
         // If last letter of the word is a e then subtract 1 (silent e at the end of a word).
         Pattern p = Pattern.compile("(?=e\\b)(?!ee$).");
         Matcher m = p.matcher(lowercaseWord);
         while (m.find()) {
-            // Subratcs 1 every time it matches the regex
+            // Subtracts 1 every time it matches the regex
             syllableCount--;
         }
 
@@ -162,7 +166,6 @@ public class Syllables
             }
         }
 
-
         Pattern les = Pattern.compile("les\\b");
         Matcher matchLes = les.matcher(lowercaseWord);
         while (matchLes.find()) {
@@ -200,6 +203,9 @@ public class Syllables
         if (syllableCount == 0){
             syllableCount++;
         }
+
+
+
 
         // Returns the syllableCount to the getSyllableCount function.
         return syllableCount;

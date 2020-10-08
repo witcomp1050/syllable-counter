@@ -177,18 +177,11 @@ public class Syllables
         }
     }
 
-        Pattern iO = Pattern.compile("(\\bio)");
+        Pattern iO = Pattern.compile("\\bio");
         // Matches the pattern with the word
         Matcher startsWithIO = iO.matcher(lowercaseWord);
         // Finds the pattern
         while (startsWithIO.find()) {
-            // Add one to syllableCount.
-            syllableCount++;
-        }
-
-        // If the word starts with io --> add 1 to the syllable count.
-        if (lowercaseWord.startsWith("io"))
-        {
             // Add one to syllableCount.
             syllableCount++;
         }

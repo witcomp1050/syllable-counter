@@ -2,6 +2,8 @@ package edu.wit.comp1050;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.lang.System.*;
 
@@ -74,11 +76,9 @@ public class Syllables
             }
     }
 
-    public static int getSyllableCount(String word)
-    {
+    public static int getSyllableCount(String word) {
         // Sends the word as a parameter to the wordIsEmpty function
-        if (wordIsEmpty(word))
-        {
+        if (wordIsEmpty(word)) {
             // Returns 0 if word is null or empty from the helper class.
             return 0;
         }
@@ -89,86 +89,79 @@ public class Syllables
 
 
         // For loop for the length of the word.
-        for (int i = 0; i < lowercaseWord.length(); i++)
-        {
+        for (int i = 0; i < lowercaseWord.length(); i++) {
             //Counts the number of vowels (a, e, i, o, u) in the word.
-            if (lowercaseWord.charAt(i) == 'a' || lowercaseWord.charAt(i) == 'e' || lowercaseWord.charAt(i) == 'i' || lowercaseWord.charAt(i) == 'o' || lowercaseWord.charAt(i) == 'u')
-            {
+            if (lowercaseWord.charAt(i) == 'a' || lowercaseWord.charAt(i) == 'e' || lowercaseWord.charAt(i) == 'i' || lowercaseWord.charAt(i) == 'o' || lowercaseWord.charAt(i) == 'u') {
                 // Add one to syllableCount.
-                syllableCount++;
+                ++syllableCount;
             }
         }
 
-       // Add 1 every time the letter y makes the sound of a vowel. (When y is not the first letter in the word.)
-       if (lowercaseWord.charAt(0) != 'y' && lowercaseWord.contains("y"))
-       {
-           // Add one to syllableCount.
-           syllableCount++;
-       }
+        // Add 1 every time the letter y makes the sound of a vowel. (When y is not the first letter in the word.)
+        if (lowercaseWord.charAt(0) != 'y' && lowercaseWord.contains("y")) {
+            // Add one to syllableCount.
+            syllableCount++;
+        }
         // If last letter of the word is a e then subtract 1 (silent e at the end of a word).
-        if (lowercaseWord.endsWith("e"))
-        {
-            // Subtract one to syllableCount.
+        Pattern p = Pattern.compile("(?=e\\b)(?!ee$).");
+        Matcher m = p.matcher(lowercaseWord);
+        while (m.find()) {
+            // Subratcs 1 every time it matches the regex
             syllableCount--;
         }
 
         // Subtract 1 for each diphthong or triphthong in the word.
         // Reads the triphthongs.txt file.
-        try
-        {
+        try {
             InputStream inputTriph = Syllables.class.getResourceAsStream("/triphthongs.txt");
             BufferedReader readTriphthongsFile = new BufferedReader(new InputStreamReader(inputTriph));
 
             String contentsFromTriphthongsFile = "";
-            while((contentsFromTriphthongsFile = readTriphthongsFile.readLine() ) != null) {
+            while ((contentsFromTriphthongsFile = readTriphthongsFile.readLine()) != null) {
                 if (lowercaseWord.contains(contentsFromTriphthongsFile)) {
                     // Subtract one to syllableCount.
                     syllableCount--;
                 }
             }
 
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             // If file not found print string below.
-            out.println (ex.toString());
+            out.println(ex.toString());
             // Exits out of the program.
             exit(0);
         }
 
         // Reads the diphthongs.txt file.
-        try
-        {
+        try {
             InputStream inputDiph = Syllables.class.getResourceAsStream("/diphthongs.txt");
             BufferedReader readDiphthongsFile = new BufferedReader(new InputStreamReader(inputDiph));
 
             String contentsFromDiphthongsFile = "";
-            while((contentsFromDiphthongsFile = readDiphthongsFile.readLine() ) != null) {
+            while ((contentsFromDiphthongsFile = readDiphthongsFile.readLine()) != null) {
                 if (lowercaseWord.contains(contentsFromDiphthongsFile)) {
                     // Subtract one to syllableCount.
                     syllableCount--;
                 }
             }
-
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             // If file not found print string below.
-            out.println (ex.toString());
+            out.println(ex.toString());
             // Exits out of the program.
             exit(0);
         }
 
-        // Checks if the word ends with le.
-        if (lowercaseWord.endsWith("le"))
-        {
+        Pattern le = Pattern.compile("le\\b");
+        Matcher matchLe = le.matcher(lowercaseWord);
+        while (matchLe.find()) {
             // Gets the character before attached to the le.
             String leBeforeIfConsonant = lowercaseWord.substring(lowercaseWord.lastIndexOf("le") - 1);
             // Checks if it contains a vowel if not then continue if statement.
-            if (!(leBeforeIfConsonant.startsWith("a") || leBeforeIfConsonant.startsWith("e") || leBeforeIfConsonant.startsWith("i") || leBeforeIfConsonant.startsWith("o") || leBeforeIfConsonant.startsWith("u")))
-            {
+            if (!(leBeforeIfConsonant.startsWith("a") || leBeforeIfConsonant.startsWith("e") || leBeforeIfConsonant.startsWith("i") || leBeforeIfConsonant.startsWith("o") || leBeforeIfConsonant.startsWith("u"))) {
                 // Add one to syllableCount
                 syllableCount++;
             }
         }
+
 
         // Checks if the word ends with les.
         if (lowercaseWord.endsWith("les"))

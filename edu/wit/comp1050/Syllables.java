@@ -163,11 +163,12 @@ public class Syllables
         }
 
 
-        // Checks if the word ends with les.
-        if (lowercaseWord.endsWith("les"))
-        {
+        Pattern les = Pattern.compile("les\\b");
+        Matcher matchLes = les.matcher(lowercaseWord);
+        while (matchLes.find()) {
         // Gets the character before attached to the le.
         String lesBeforeIfConsonant = lowercaseWord.substring(lowercaseWord.lastIndexOf("les") - 1);
+        System.out.println(lesBeforeIfConsonant);
         // Checks if it contains a vowel if not then continue if statement.
         if (!(lesBeforeIfConsonant.startsWith("a") || lesBeforeIfConsonant.startsWith("e") || lesBeforeIfConsonant.startsWith("i") || lesBeforeIfConsonant.startsWith("o") || lesBeforeIfConsonant.startsWith("u")))
         {

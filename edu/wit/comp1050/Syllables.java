@@ -183,17 +183,23 @@ public class Syllables
             // Add one to syllableCount.
             syllableCount++;
         }
-        // If the word ends with ee or ie --> add 1 to the syllable count.
-        if (lowercaseWord.endsWith("ee") || lowercaseWord.endsWith("ie"))
-        {
+
+        //  Pattern to check if the word or words end with ee
+        Pattern EEIE = Pattern.compile("ee\\b|ie\\b");
+        // Matches the pattern with the word
+        Matcher endsWithEEorIE = EEIE.matcher(lowercaseWord);
+        // Finds the pattern
+        while (endsWithEEorIE.find()) {
             // Add one to syllableCount.
             syllableCount++;
+
         }
 
         // (Most likely a better way to do this)
         // If for any circumstance the syllableCount is equal to 0 it returns 1 instead
-        if (syllableCount == 0)
-            return 1;
+        if (syllableCount == 0){
+            syllableCount++;
+        }
 
         // Returns the syllableCount to the getSyllableCount function.
         return syllableCount;

@@ -132,12 +132,14 @@ public class Syllables
             BufferedReader readTriphthongsFile = new BufferedReader(new InputStreamReader(inputTriph));
 
             String contentsFromTriphthongsFile = "";
-            while ((contentsFromTriphthongsFile = readTriphthongsFile.readLine()) != null)
-            {
-                if (lowercaseWord.contains(contentsFromTriphthongsFile))
+            while ((contentsFromTriphthongsFile = readTriphthongsFile.readLine()) != null) {
+                for (int i = 0; i < contentsFromTriphthongsFile.length(); i++)
                 {
-                    // Subtract one to syllableCount.
-                    syllableCount--;
+                    if (lowercaseWord.contains(contentsFromTriphthongsFile))
+                    {
+                        // Subtract one to syllableCount.
+                        syllableCount--;
+                    }
                 }
             }
 
@@ -159,10 +161,13 @@ public class Syllables
             String contentsFromDiphthongsFile = "";
             while ((contentsFromDiphthongsFile = readDiphthongsFile.readLine()) != null)
             {
-                if (lowercaseWord.contains(contentsFromDiphthongsFile))
+                for (int i = 0; i < contentsFromDiphthongsFile.length(); i++)
                 {
-                    // Subtract one to syllableCount.
-                    syllableCount--;
+                    if (lowercaseWord.contains(contentsFromDiphthongsFile))
+                    {
+                        // Subtract one to syllableCount.
+                        syllableCount--;
+                    }
                 }
             }
         } catch (IOException ex)

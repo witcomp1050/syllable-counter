@@ -31,7 +31,6 @@ public class Syllables
         // Captures the int front sending the capture word into getSyllableCount parameter.
         int numberOfSyllables = getSyllableCount(captureTheWord);
 
-
         // Checks if there is 1 argument
         if (args.length == 1)
         {
@@ -92,7 +91,18 @@ public class Syllables
         // Converts the word to lowercase
         String lowercaseWord = word.toLowerCase();
 
-        // For loop for the length of the word.
+        // Testing
+//        Pattern countVowels = Pattern.compile("([aeiou]+)");
+//        Matcher matchVowels = countVowels.matcher(lowercaseWord);
+//        while (matchVowels.find())
+//        {
+//            // Subtracts 1 every time it matches the regex
+//            syllableCount++;
+//        }
+//        // For Debug
+//        System.out.printf("Vowels: %d%n", syllableCount);
+
+         //For loop for the length of the word.
         for (int i = 0; i < lowercaseWord.length(); i++)
         {
             //Counts the number of vowels (a, e, i, o, u) in the word.
@@ -103,18 +113,19 @@ public class Syllables
             }
         }
 
+
         // Add 1 every time the letter y makes the sound of a vowel. (When y is not the first letter in the word.)
-        Pattern doesNotStartWithY = Pattern.compile("(?=\\By)(?!y$).");
+        Pattern doesNotStartWithY = Pattern.compile("(\\By)");
         Matcher matchRegexForY = doesNotStartWithY.matcher(lowercaseWord);
         while (matchRegexForY.find())
         {
-            // Subtracts 1 every time it matches the regex
+            // Adds 1 every time it matches the regex
             syllableCount++;
         }
 
 
         // If last letter of the word is a e then subtract 1 (silent e at the end of a word).
-        Pattern p = Pattern.compile("(?=e\\b)(?!ee$).");
+        Pattern p = Pattern.compile("(e\\b)");
         Matcher m = p.matcher(lowercaseWord);
         while (m.find())
         {
@@ -146,6 +157,7 @@ public class Syllables
             // Exits out of the program.
             exit(0);
         }
+
 
         // Reads the diphthongs.txt file.
         try
@@ -183,6 +195,7 @@ public class Syllables
                 syllableCount++;
             }
         }
+
 
         Pattern les = Pattern.compile("les\\b");
         Matcher matchLes = les.matcher(lowercaseWord);

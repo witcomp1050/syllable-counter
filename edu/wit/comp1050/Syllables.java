@@ -91,17 +91,6 @@ public class Syllables
         // Converts the word to lowercase
         String lowercaseWord = word.toLowerCase();
 
-        // Testing
-//        Pattern countVowels = Pattern.compile("([aeiou]+)");
-//        Matcher matchVowels = countVowels.matcher(lowercaseWord);
-//        while (matchVowels.find())
-//        {
-//            // Subtracts 1 every time it matches the regex
-//            syllableCount++;
-//        }
-//        // For Debug
-//        System.out.printf("Vowels: %d%n", syllableCount);
-
          //For loop for the length of the word.
         for (int i = 0; i < lowercaseWord.length(); i++)
         {
@@ -113,6 +102,8 @@ public class Syllables
             }
         }
 
+        // For Debug
+        System.out.printf("Vowels: %d%n", syllableCount);
 
         // Add 1 every time the letter y makes the sound of a vowel. (When y is not the first letter in the word.)
         Pattern doesNotStartWithY = Pattern.compile("(\\By)");

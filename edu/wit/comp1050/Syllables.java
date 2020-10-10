@@ -182,7 +182,7 @@ public class Syllables
             exit(0);
         }
 
-        Pattern le = Pattern.compile("le\\b");
+        Pattern le = Pattern.compile("(le\\b)");
         Matcher matchLe = le.matcher(lowercaseWord);
         while (matchLe.find())
         {
@@ -197,7 +197,7 @@ public class Syllables
         }
 
 
-        Pattern les = Pattern.compile("les\\b");
+        Pattern les = Pattern.compile("(les\\b)");
         Matcher matchLes = les.matcher(lowercaseWord);
         while (matchLes.find())
         {
@@ -211,7 +211,7 @@ public class Syllables
             }
         }
 
-        Pattern iO = Pattern.compile("\\bio");
+        Pattern iO = Pattern.compile("(\\bio)");
         // Matches the pattern with the word
         Matcher startsWithIO = iO.matcher(lowercaseWord);
         // Finds the pattern
@@ -222,7 +222,7 @@ public class Syllables
         }
 
         //  Pattern to check if the word or words end with ee
-        Pattern eEIE = Pattern.compile("ee\\b|ie\\b");
+        Pattern eEIE = Pattern.compile("(ee\\b|ie\\b)");
         // Matches the pattern with the word
         Matcher endsWithEEorIE = eEIE.matcher(lowercaseWord);
         // Finds the pattern

@@ -1,7 +1,9 @@
 package edu.wit.comp1050;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -91,7 +93,7 @@ public class Syllables
         // Converts the word to lowercase
         String lowercaseWord = word.toLowerCase();
 
-         //For loop for the length of the word.
+        // For loop for the length of the word.
         for (int i = 0; i < lowercaseWord.length(); i++)
         {
             //Counts the number of vowels (a, e, i, o, u) in the word.
@@ -114,7 +116,6 @@ public class Syllables
             syllableCount++;
         }
 
-
         // If last letter of the word is a e then subtract 1 (silent e at the end of a word).
         Pattern p = Pattern.compile("(e\\b)");
         Matcher m = p.matcher(lowercaseWord);
@@ -132,17 +133,16 @@ public class Syllables
             BufferedReader readTriphthongsFile = new BufferedReader(new InputStreamReader(inputTriph));
 
             String contentsFromTriphthongsFile = "";
-            while ((contentsFromTriphthongsFile = readTriphthongsFile.readLine()) != null) {
-                for (int i = 0; i < contentsFromTriphthongsFile.length(); i++)
+            while ((contentsFromTriphthongsFile = readTriphthongsFile.readLine()) != null)
+            {
+                Pattern readFilePattern = Pattern.compile(contentsFromTriphthongsFile);
+                Matcher matchFilePattern = readFilePattern.matcher(lowercaseWord);
+                while (matchFilePattern.find())
                 {
-                    if (lowercaseWord.contains(contentsFromTriphthongsFile))
-                    {
-                        // Subtract one to syllableCount.
-                        syllableCount--;
-                    }
+                    // Subtracts 1 every time it matches the regex
+                    syllableCount--;
                 }
             }
-
         } catch (IOException ex)
         {
             // If file not found print string below.
@@ -151,7 +151,6 @@ public class Syllables
             exit(0);
         }
 
-
         // Reads the diphthongs.txt file.
         try
         {
@@ -159,15 +158,15 @@ public class Syllables
             BufferedReader readDiphthongsFile = new BufferedReader(new InputStreamReader(inputDiph));
 
             String contentsFromDiphthongsFile = "";
+
             while ((contentsFromDiphthongsFile = readDiphthongsFile.readLine()) != null)
             {
-                for (int i = 0; i < contentsFromDiphthongsFile.length(); i++)
+                Pattern readFilePattern = Pattern.compile(contentsFromDiphthongsFile);
+                Matcher matchFilePattern = readFilePattern.matcher(lowercaseWord);
+                while (matchFilePattern.find())
                 {
-                    if (lowercaseWord.contains(contentsFromDiphthongsFile))
-                    {
-                        // Subtract one to syllableCount.
-                        syllableCount--;
-                    }
+                    // Subtracts 1 every time it matches the regex
+                    syllableCount--;
                 }
             }
         } catch (IOException ex)
@@ -191,7 +190,6 @@ public class Syllables
                 syllableCount++;
             }
         }
-
 
         Pattern les = Pattern.compile("(les\\b)");
         Matcher matchLes = les.matcher(lowercaseWord);
@@ -222,6 +220,7 @@ public class Syllables
         // Matches the pattern with the word
         Matcher endsWithEEorIE = eEIE.matcher(lowercaseWord);
         // Finds the pattern
+
         while (endsWithEEorIE.find())
         {
             // Add one to syllableCount.

@@ -1,9 +1,7 @@
 package edu.wit.comp1050;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,121 +10,106 @@ import static java.lang.System.*;
 
 public class Syllables
 {
+    /*
+        Gets the the arguments passed in from the terminal/console and checks if it contains "-d" as an argument to test
+        if the word is in the dictionary and returns the number of the syllables. If does not pass in "-d" runs the program with the
+        word the user passes in without checking if its in the dictionary and returns the number of syllables.
+     */
     public static void main(String[] args) throws IOException
     {
-        // Initiates the variable
         String captureTheWord = "";
+        int numberOfSyllables = getSyllableCount(captureTheWord);
 
-        // If the length of the argument is not 0 then continue
         if (!(args.length == 0))
         {
-            // Word from terminal into variable captureTheWord
             captureTheWord = args[0];
         } else
         {
-            // Print if the if statement is true
             out.println("usage: Syllables <English word>");
-            // return to main method and exits
             return;
         }
 
-        // Captures the int front sending the capture word into getSyllableCount parameter.
-        int numberOfSyllables = getSyllableCount(captureTheWord);
-
-        // Checks if there is 1 argument
         if (args.length == 1)
         {
-            // Prints if true
             if (numberOfSyllables == 1)
             {
                 out.printf("'%s' has %d syllable%n", captureTheWord, numberOfSyllables);
-            } else
-                {
+            }
+            else
+            {
                 out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
             }
-            // Checks if there is a argument
-        } else if(args.length == 2)
+        }
+        else if(args.length == 2)
         {
-            // if that argument is equal to the string -d then continue
             if (args[1].equals("-d"))
             {
-                // Checks if the word is in the english.txt
                 boolean wordCheckDictionary = checkEnglishWord(captureTheWord);
-                // If true print out the word with the syllables
+
                 if (wordCheckDictionary)
                 {
-                    // If the number of Syllables is equal to one print out 'syllable'
                     if (numberOfSyllables == 1)
                     {
                         out.printf("'%s' has %d syllable%n", captureTheWord, numberOfSyllables);
-                    } else
-                        {
+                    }
+                    else
+                    {
                         out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
                     }
-                } else
+                }
+                else
                 {
-                    // If false print out the word could not be found
                     out.printf("'%s' is not an English word that I know!%n", captureTheWord);
                 }
-            } else
-                {
-                // Prints out when the second argument is not -d
-                out.println("usage: Syllables <English word>");
             }
-        } else
+            else
+           {
+                out.println("usage: Syllables <English word>"); // argument other than a -d
+            }
+        }
+        else
         {
-            // Prints out when there are more than two arguments
-            out.println("usage: Syllables <English word>");
+            out.println("usage: Syllables <English word>"); // more than two arguments
         }
     }
 
+    /*
+        Function checks for vowels, if the string ends with e, contains y but it can't be the first letter, tripthongs, dipthongs,
+        if it starts with io, ends with ee or ie, and le and les and the letter before le and les have to be constant.
+     */
     public static int getSyllableCount(String word)
     {
-        // Sends the word as a parameter to the wordIsEmpty function
-        if (wordIsEmpty(word))
-        {
-            // Returns 0 if word is null or empty from the helper class.
-            return 0;
-        }
-        // Initiates the syllableCount variable as a integer.
         int syllableCount = 0;
-        // Converts the word to lowercase
         String lowercaseWord = word.toLowerCase();
 
-        // For loop for the length of the word.
+        if (wordIsEmpty(word))
+        {
+            return 0;
+        }
+
         for (int i = 0; i < lowercaseWord.length(); i++)
         {
-            //Counts the number of vowels (a, e, i, o, u) in the word.
             if (lowercaseWord.charAt(i) == 'a' || lowercaseWord.charAt(i) == 'e' || lowercaseWord.charAt(i) == 'i' || lowercaseWord.charAt(i) == 'o' || lowercaseWord.charAt(i) == 'u')
             {
-                // Add one to syllableCount.
                 ++syllableCount;
             }
         }
 
-        // For Debug
-        System.out.printf("Vowels: %d%n", syllableCount);
-
-        // Add 1 every time the letter y makes the sound of a vowel. (When y is not the first letter in the word.)
         Pattern doesNotStartWithY = Pattern.compile("(\\By)");
         Matcher matchRegexForY = doesNotStartWithY.matcher(lowercaseWord);
         while (matchRegexForY.find())
         {
-            // Adds 1 every time it matches the regex
             syllableCount++;
         }
 
-        // If last letter of the word is a e then subtract 1 (silent e at the end of a word).
         Pattern p = Pattern.compile("(e\\b)");
         Matcher m = p.matcher(lowercaseWord);
+
         while (m.find())
         {
-            // Subtracts 1 every time it matches the regex
             syllableCount--;
         }
 
-        // Subtract 1 for each diphthong or triphthong in the word.
-        // Reads the triphthongs.txt file.
         try
         {
             InputStream inputTriph = Syllables.class.getResourceAsStream("/triphthongs.txt");
@@ -137,21 +120,18 @@ public class Syllables
             {
                 Pattern readFilePattern = Pattern.compile(contentsFromTriphthongsFile);
                 Matcher matchFilePattern = readFilePattern.matcher(lowercaseWord);
+
                 while (matchFilePattern.find())
                 {
-                    // Subtracts 1 every time it matches the regex
                     syllableCount--;
                 }
             }
         } catch (IOException ex)
         {
-            // If file not found print string below.
             out.println(ex.toString());
-            // Exits out of the program.
             exit(0);
         }
 
-        // Reads the diphthongs.txt file.
         try
         {
             InputStream inputDiph = Syllables.class.getResourceAsStream("/diphthongs.txt");
@@ -163,106 +143,92 @@ public class Syllables
             {
                 Pattern readFilePattern = Pattern.compile(contentsFromDiphthongsFile);
                 Matcher matchFilePattern = readFilePattern.matcher(lowercaseWord);
+
                 while (matchFilePattern.find())
                 {
-                    // Subtracts 1 every time it matches the regex
                     syllableCount--;
                 }
             }
         } catch (IOException ex)
         {
-            // If file not found print string below.
             out.println(ex.toString());
-            // Exits out of the program.
             exit(0);
         }
 
         Pattern le = Pattern.compile("(le\\b)");
         Matcher matchLe = le.matcher(lowercaseWord);
+
         while (matchLe.find())
         {
-            // Gets the character before attached to the le.
             String leBeforeIfConsonant = lowercaseWord.substring(lowercaseWord.lastIndexOf("le") - 1);
-            // Checks if it contains a vowel if not then continue if statement.
+
             if (!(leBeforeIfConsonant.startsWith("a") || leBeforeIfConsonant.startsWith("e") || leBeforeIfConsonant.startsWith("i") || leBeforeIfConsonant.startsWith("o") || leBeforeIfConsonant.startsWith("u")))
             {
-                // Add one to syllableCount
                 syllableCount++;
             }
         }
 
         Pattern les = Pattern.compile("(les\\b)");
         Matcher matchLes = les.matcher(lowercaseWord);
+
+        String lesBeforeIfConsonant = "";
+
         while (matchLes.find())
         {
-            // Gets the character before attached to the le.
-            String lesBeforeIfConsonant = lowercaseWord.substring(lowercaseWord.lastIndexOf("les") - 1);
-            // Checks if it contains a vowel if not then continue if statement.
+            lesBeforeIfConsonant = lowercaseWord.substring(lowercaseWord.lastIndexOf("les") - 1);
+
             if (!(lesBeforeIfConsonant.startsWith("a") || lesBeforeIfConsonant.startsWith("e") || lesBeforeIfConsonant.startsWith("i") || lesBeforeIfConsonant.startsWith("o") || lesBeforeIfConsonant.startsWith("u")))
             {
-                // Add one to syllableCount.
                 syllableCount++;
             }
         }
 
         Pattern iO = Pattern.compile("(\\bio)");
-        // Matches the pattern with the word
         Matcher startsWithIO = iO.matcher(lowercaseWord);
-        // Finds the pattern
+
         while (startsWithIO.find())
         {
-            // Add one to syllableCount.
             syllableCount++;
         }
 
-        //  Pattern to check if the word or words end with ee
         Pattern eEIE = Pattern.compile("(ee\\b|ie\\b)");
-        // Matches the pattern with the word
         Matcher endsWithEEorIE = eEIE.matcher(lowercaseWord);
-        // Finds the pattern
 
         while (endsWithEEorIE.find())
         {
-            // Add one to syllableCount.
             syllableCount++;
         }
 
-        // If for any circumstance the syllableCount is equal to 0 it returns 1 instead
-        if (syllableCount == 0){
+
+        if (syllableCount == 0)
+        {
             syllableCount++;
         }
 
-        // Returns the syllableCount to the getSyllableCount function.
         return syllableCount;
     }
 
-    // Helper class to check if the String word is null or empty.
+    // Function to check if the word that is being passed into the program is a null or empty.
     private static boolean wordIsEmpty(String word)
     {
-        // Checks if the word is null or is a empty string.
         return word == null || word.length() == 0;
     }
 
-    // Check if the word is in the dictionary (english.txt)
+    // Function checks if the word is in the english.txt file and if it does returns true.
     public static boolean checkEnglishWord(String word) throws IOException
     {
-        // Turns the word into lowercase
+
         String noCaseMatter = word.toLowerCase();
-
-        // BufferedReader initiated
-        BufferedReader fileReader = new BufferedReader(new FileReader("english.txt"));
-        // Creates the array
-        ArrayList<String> captureDictionary = new ArrayList<String>();
-        // String for current line
         String currentLine;
+        ArrayList<String> captureDictionary = new ArrayList<String>();
 
-        // If not null then add current line to the array
+        BufferedReader fileReader = new BufferedReader(new FileReader("english.txt"));
+
         while ((currentLine = fileReader.readLine()) != null)
         {
             captureDictionary.add(currentLine);
         }
 
-        // Returns true or false based on if the word could be found
         return captureDictionary.contains(noCaseMatter);
     }
 }

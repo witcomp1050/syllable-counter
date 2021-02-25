@@ -17,7 +17,7 @@ usage: Syllables <English word>
 
 
 Find the script's directory, mine was located in: Desktop\syllables-RamonAsuncion and run the script.
-![GIF](https://recordit.co/0hEmXNujRK)
+![GIF](http://g.recordit.co/0hEmXNujRK.gif)
 
 ## Example 
 ##### Terminal

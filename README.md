@@ -26,6 +26,7 @@ $ java edu.wit.comp1050.Syllables ok -d
 'ok' has 1 syllable
 ```
 
-##### Wentworth Institute of Technology
-##### #COMP1050
-##### Assignment #1, Syllables
+## Errors in code
+
+When inputting more than one word into the syllable counter it dosen't add 1 to 
+words like "the" that have 0 syllables. Also, the les and le have to worked on. 

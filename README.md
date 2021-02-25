@@ -17,12 +17,12 @@ usage: Syllables <English word>
 
 
 Find the script's directory, mine was located in: Desktop\syllables-RamonAsuncion and run the script.
-![GIF](http://g.recordit.co/F4CBw3kTKD.gif)
+![GIF](https://recordit.co/0hEmXNujRK)
 
 ## Example 
 ##### Terminal
 ```
-$ java edu.wit.comp1050.Syllables ok -d
+$ java xyz/ramonasuncion/Syllables ok -d
 'ok' has 1 syllable
 ```
 

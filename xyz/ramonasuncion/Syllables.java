@@ -19,41 +19,52 @@ public class Syllables {
      */
     public static void main(String[] args) throws IOException {
         String captureTheWord = "";
-        int numberOfSyllables = getSyllableCount(captureTheWord);
+        int numberOfSyllables = 0;
 
         if (!(args.length == 0)) {
             captureTheWord = args[0];
-        } else {
-            out.println("usage: Syllables <English word>");
-            return;
+            numberOfSyllables = getSyllableCount(captureTheWord);
         }
-
-        if (args.length == 1) {
+        else {
+            out.println("usage: Syllables <English word>");
+            exit(0);
+        }
+        if (args.length == 1)
+        {
             if (numberOfSyllables == 1) {
                 out.printf("'%s' has %d syllable%n", captureTheWord, numberOfSyllables);
-            } else {
+            }
+            else {
                 out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
             }
-        } else if (args.length == 2) {
-            if (args[1].equals("-d")) {
+        }
+        else if(args.length == 2)
+        {
+            if (args[1].equals("-d"))
+            {
                 boolean wordCheckDictionary = checkEnglishWord(captureTheWord);
 
                 if (wordCheckDictionary) {
                     if (numberOfSyllables == 1) {
                         out.printf("'%s' has %d syllable%n", captureTheWord, numberOfSyllables);
-                    } else {
+                    }
+                    else {
                         out.printf("'%s' has %d syllables%n", captureTheWord, numberOfSyllables);
                     }
-                } else {
+                }
+                else {
                     out.printf("'%s' is not an English word that I know!%n", captureTheWord);
                 }
-            } else {
+            }
+            else {
                 out.println("usage: Syllables <English word>"); // argument other than a -d
             }
-        } else {
+        }
+        else {
             out.println("usage: Syllables <English word>"); // more than two arguments
         }
     }
+
 
     /*
      * Function checks for vowels, if the string ends with e, contains y but it
@@ -72,7 +83,7 @@ public class Syllables {
         for (int i = 0; i < lowercaseWord.length(); i++) {
             if (lowercaseWord.charAt(i) == 'a' || lowercaseWord.charAt(i) == 'e' || lowercaseWord.charAt(i) == 'i'
                     || lowercaseWord.charAt(i) == 'o' || lowercaseWord.charAt(i) == 'u') {
-                ++syllableCount;
+                syllableCount++;
             }
         }
 

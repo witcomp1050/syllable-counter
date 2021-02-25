@@ -1,4 +1,4 @@
-package edu.wit.comp1050;
+package xyz.ramonasuncion;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
